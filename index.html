@@ -1,0 +1,1964 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ניהול משימות</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="המערכת הפשוטה לניהול המשימות שלך">
+    <meta name="theme-color" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ניהול משימות">
+    <meta name="mobile-web-app-capable" content="yes">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIteQ15nXlNeV15wg157XndeZ157XldeqIiwKICAic2hvcnRfbmFtZSI6ICLXnteZ157XldeqIiwKICAiZGVzY3JpcHRpb24iOiAi15DXnteX16jXpteen15EXnSDeh8eUdeh+dYCO2Xm21nXode416j1nVnxu157z7rEd6jeh+mXldddvleYqeeR+d+OXFmOeKo+vLEd6jz4rmL20nHdY5lnnnL4eUmOd6j04rEZ8bz7rE5o8eKx20nHc9VjdY56Q==">
+    
+    <!-- PWA Icons (using data URLs for simplicity) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFNTE3OEEzMjk5QTAxMUUyOUExNUJDMTA0NjlEQjMzRiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFNTE3OEEzMzk5QTAxMUUyOUExNUJDMTA0NjlEQjMzRiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkU1MTc4QTMwOTlBMDExRTI5QTE1QkMxMDQ2OURCMzNGIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkU1MTc4QTMxOTlBMDExRTI5QTE1QkMxMDQ2OURCMzNGIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Af/+/fz7+vn49/b19PPy8fDv7u3s6+rp6Ofm5eTj4uHg397d3Nva2djX1tXU09LR0M/OzczLysnIx8bFxMPCwcC/vr28u7q5uLe2tbSzsrGwr66trKuqqainpqWko6KhoJ+enZybmpmYl5aVlJOSkZCPjo2Mi4qJiIeGhYSDgoGAf359fHt6eXh3dnV0c3JxcG9ubWxramloZ2ZlZGNiYWBfXl1cW1pZWFdWVVRTUlFQT05NTEtKSUhHRkVEQ0JBQD8+PTw7Ojk4NzY1NDMyMTAvLi0sKyopKCcmJSQjIiEgHx4dHBsaGRgXFhUUExIREA8ODQwLCgkIBwYFBAMCAQAAIfkEAQoAAwAsAAAAACAAIAAAAnGMj6nL7Q+jnLTai7PevPsPhuJIluaJpurKtu4Lx/JM1/aN5/rO9/4PDAqHxKLxiEwql8ym8wmNSqfUqvWKzWq33K73Cw6Lx+Sy+YxOq9fs9vvNdsPn9Lr9js/v+/+AgYKDhIWGh4iJiouMjY6PkJGSk5QCACH5BAEKAAMALAAAAAAgACAAAAJxjI+py+0Po5y02ouz3rz7D4biSJbmiabqyrbuC8fyTNf2jef6zvf+DwwKh8Si8YhMKpfMpvMJjUqn1Kr1is1qt9yu9wsOi8fksvmMTqvX7Pb7zXbD5/S6/Y7P7/v/gIGCg4SFhoeIiYqLjI2Oj5CRkpOUAh8=">
+    <link rel="apple-touch-icon" href="data:image/png;base64,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">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin-bottom: 5px;
+            font-size: 2em;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        /* כרטיסי הסטטוס */
+        .status-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .status-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 20px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0.0, 0.2, 1);
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .status-card:hover::before {
+            opacity: 1;
+        }
+
+        .status-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .status-card.active {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+        }
+
+        .status-card-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover .status-card-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.2));
+        }
+
+        .status-card-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .status-card:hover .status-card-number {
+            transform: scale(1.05);
+        }
+
+        .status-card-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        /* כפתור כל המשימות */
+        .btn-all-tasks {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-all-tasks:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, #218838 0%, #1e7e34 100%);
+        }
+
+        .btn-all-tasks.active {
+            background: linear-gradient(135deg, #155724 0%, #1e7e34 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        .all-tasks-icon {
+            font-size: 1.2em;
+        }
+
+        /* צבעים חיים לכרטיסים */
+        .card-pending {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 3px solid #fdcb6e;
+        }
+        .card-pending .status-card-icon { color: #e17055; }
+        .card-pending .status-card-number { color: #d63031; }
+        .card-pending .status-card-title { color: #e17055; }
+        .card-pending:hover {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            border-color: #e17055;
+        }
+
+        .card-in-progress {
+            background: linear-gradient(135deg, #e3f2fd 0%, #64b5f6 100%);
+            border: 3px solid #2196f3;
+        }
+        .card-in-progress .status-card-icon { color: #1976d2; }
+        .card-in-progress .status-card-number { color: #0d47a1; }
+        .card-in-progress .status-card-title { color: #1976d2; }
+        .card-in-progress:hover {
+            background: linear-gradient(135deg, #64b5f6 0%, #2196f3 100%);
+            border-color: #1976d2;
+        }
+
+        .card-overdue {
+            background: linear-gradient(135deg, #ffebee 0%, #ff7675 100%);
+            border: 3px solid #e84393;
+        }
+        .card-overdue .status-card-icon { color: #d63031; }
+        .card-overdue .status-card-number { color: #b71c1c; }
+        .card-overdue .status-card-title { color: #d63031; }
+        .card-overdue:hover {
+            background: linear-gradient(135deg, #ff7675 0%, #e84393 100%);
+            border-color: #d63031;
+        }
+
+        .card-completed {
+            background: linear-gradient(135deg, #e8f5e8 0%, #4caf50 100%);
+            border: 3px solid #81c784;
+        }
+        .card-completed .status-card-icon { color: #27ae60; }
+        .card-completed .status-card-number { color: #1b5e20; }
+        .card-completed .status-card-title { color: #27ae60; }
+        .card-completed:hover {
+            background: linear-gradient(135deg, #4caf50 0%, #81c784 100%);
+            border-color: #27ae60;
+        }
+
+        /* טופס הוספת משימה */
+        .add-task-form {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .add-task-form h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group input:invalid {
+            border-color: #dc3545;
+        }
+
+        .reminder-btn {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+            z-index: 2;
+        }
+
+        .reminder-btn:hover {
+            color: #667eea;
+        }
+
+        .reminder-btn.active {
+            color: #ffc107;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+
+        /* חיפוש */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+            pointer-events: none;
+        }
+
+        .clear-search {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 18px;
+            cursor: pointer;
+            display: none;
+        }
+
+        .clear-search:hover {
+            color: #666;
+        }
+
+        /* רשימת משימות */
+        .tasks-section {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .tasks-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tasks-header h2 {
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .tasks-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .tasks-list {
+            padding: 0;
+        }
+
+        .task-item {
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+
+        .task-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .task-item:last-child {
+            border-bottom: none;
+        }
+
+        .task-item.overdue {
+            border-right: 4px solid #dc3545;
+            background-color: #fff5f5;
+        }
+
+        .task-item.has-reminder::after {
+            content: '🔔';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 16px;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .task-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1em;
+            flex: 1;
+        }
+
+        .task-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-in-progress {
+            background: #cce7ff;
+            color: #0056b3;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-overdue {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .task-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .task-detail span {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .task-actions {
+            margin-top: 15px;
+        }
+
+        .btn-small {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        .btn-small:hover {
+            background: #218838;
+        }
+
+        .btn-edit {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .btn-edit:hover {
+            background: #e0a800;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 10px;
+            color: #999;
+        }
+
+        /* מודל אישור מחיקה */
+        .delete-confirm-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .delete-confirm-content {
+            background-color: white;
+            margin: 20% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .delete-confirm-content h3 {
+            margin-bottom: 15px;
+            color: #dc3545;
+            font-size: 1.3em;
+        }
+
+        .delete-confirm-content p {
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .delete-confirm-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-confirm-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-confirm-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-cancel-delete {
+            background: #6c757d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .btn-cancel-delete:hover {
+            background: #545b62;
+        }
+
+        /* מודל תזכורת */
+        .reminder-modal {
+            display: none;
+            position: fixed;
+            z-index: 1500;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .reminder-modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 25px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 400px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .reminder-modal h3 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .reminder-form-group {
+            margin-bottom: 15px;
+        }
+
+        .reminder-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .reminder-form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e1e5e9;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+
+        .reminder-form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .reminder-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* מודל עריכה */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            color: #aaa;
+            float: left;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* התראות */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #28a745;
+            color: white;
+            border-radius: 5px;
+            z-index: 2000;
+            animation: slideInRight 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .notification.error {
+            background: #dc3545;
+        }
+
+        .notification.warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        /* נגישות */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus indicators */
+        button:focus,
+        input:focus,
+        select:focus,
+        .status-card:focus {
+            outline: 2px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .status-cards {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .task-details {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .task-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .status-card {
+                padding: 15px 20px;
+            }
+
+            .status-card-icon {
+                font-size: 2.2em;
+            }
+
+            .status-card-number {
+                font-size: 2em;
+            }
+
+            .status-card-title {
+                font-size: 1em;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+                padding: 20px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ניהול משימות</h1>
+            <p>המערכת הפשוטה לניהול המשימות שלך</p>
+        </div>
+
+        <!-- כרטיסי הסטטוס -->
+        <div class="status-cards">
+            <div class="status-card card-pending" onclick="filterTasks('pending')" tabindex="0" role="button" aria-label="סנן משימות בהמתנה">
+                <div class="status-card-icon" aria-hidden="true">⏳</div>
+                <div class="status-card-number" id="pendingCount">0</div>
+                <div class="status-card-title">משימות בהמתנה</div>
+            </div>
+            
+            <div class="status-card card-in-progress" onclick="filterTasks('in-progress')" tabindex="0" role="button" aria-label="סנן משימות בביצוע">
+                <div class="status-card-icon" aria-hidden="true">🔄</div>
+                <div class="status-card-number" id="inProgressCount">0</div>
+                <div class="status-card-title">משימות בביצוע</div>
+            </div>
+            
+            <div class="status-card card-overdue" onclick="filterTasks('overdue')" tabindex="0" role="button" aria-label="סנן משימות באיחור">
+                <div class="status-card-icon" aria-hidden="true">⚠️</div>
+                <div class="status-card-number" id="overdueCount">0</div>
+                <div class="status-card-title">משימות באיחור</div>
+            </div>
+            
+            <div class="status-card card-completed" onclick="filterTasks('completed')" tabindex="0" role="button" aria-label="סנן משימות שהושלמו">
+                <div class="status-card-icon" aria-hidden="true">✅</div>
+                <div class="status-card-number" id="completedCount">0</div>
+                <div class="status-card-title">משימות שהושלמו</div>
+            </div>
+        </div>
+
+        <!-- כפתור כל המשימות -->
+        <div class="all-tasks-button-container" style="text-align: center; margin-bottom: 20px;">
+            <button class="btn-all-tasks" id="allTasksBtn" onclick="filterTasks('all')" aria-label="הצג את כל המשימות">
+                <span class="all-tasks-icon">📋</span>
+                כל המשימות (<span id="allTasksCount">0</span>)
+            </button>
+        </div>
+
+        <!-- טופס הוספת משימה -->
+        <div class="add-task-form">
+            <h2>הוספת משימה חדשה</h2>
+            <form id="taskForm" novalidate>
+                <div class="form-group">
+                    <label for="taskName">שם המשימה:</label>
+                    <input type="text" id="taskName" name="taskName" placeholder="לדוגמה: לצבוע את הקיר" required minlength="2" maxlength="100">
+                    <button type="button" class="reminder-btn" id="reminderBtn" onclick="toggleReminder()" aria-label="הפעל/בטל תזכורת" title="תזכורת">
+                        🔔
+                    </button>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dueDate">תאריך יעד:</label>
+                        <input type="date" id="dueDate" name="dueDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="assignee">אחראי:</label>
+                        <input type="text" id="assignee" name="assignee" placeholder="לדוגמה: יוסי כהן" required minlength="2" maxlength="50">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="status">סטטוס:</label>
+                    <select id="status" name="status" required>
+                        <option value="pending">ממתין</option>
+                        <option value="in-progress">בביצוע</option>
+                        <option value="completed">הושלם</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn" onclick="addNewTask()">הוסף משימה</button>
+            </form>
+        </div>
+
+        <!-- חיפוש -->
+        <div class="search-container">
+            <input type="text" class="search-input" id="searchInput" placeholder="חפש משימות..." oninput="searchTasks()" aria-label="חפש במשימות">
+            <span class="search-icon" id="searchIcon" aria-hidden="true">🔍</span>
+            <button class="clear-search" id="clearSearch" onclick="clearSearch()" aria-label="נקה חיפוש" style="display: none;">✕</button>
+        </div>
+
+        <!-- רשימת משימות -->
+        <div class="tasks-section">
+            <div class="tasks-header">
+                <h2 id="tasksTitle">כל המשימות</h2>
+                <span class="tasks-count" id="tasksCount">0</span>
+            </div>
+            
+            <div class="tasks-list" id="tasksList" role="list">
+                <div class="empty-state">
+                    <h3>אין משימות עדיין</h3>
+                    <p>הוסף את המשימה הראשונה שלך למעלה</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל אישור מחיקה -->
+    <div id="deleteConfirmModal" class="delete-confirm-modal" role="dialog" aria-labelledby="deleteConfirmTitle" aria-hidden="true">
+        <div class="delete-confirm-content">
+            <h3 id="deleteConfirmTitle">אישור מחיקה</h3>
+            <p id="deleteConfirmMessage">האם אתה בטוח שברצונך למחוק את המשימה?</p>
+            
+            <div class="delete-confirm-actions">
+                <button type="button" class="btn-confirm-delete" id="confirmDeleteBtn">מחק</button>
+                <button type="button" class="btn-cancel-delete" id="cancelDeleteBtn">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל תזכורת -->
+    <div id="reminderModal" class="reminder-modal" role="dialog" aria-labelledby="reminderModalTitle" aria-hidden="true">
+        <div class="reminder-modal-content">
+            <span class="close" onclick="closeReminderModal()" aria-label="סגור">&times;</span>
+            <h3 id="reminderModalTitle">הגדרת תזכורת</h3>
+            
+            <div class="reminder-form-group">
+                <label for="reminderDate">תאריך התזכורת:</label>
+                <input type="date" id="reminderDate" required>
+            </div>
+            
+            <div class="reminder-form-group">
+                <label for="reminderTime">שעת התזכורת:</label>
+                <input type="time" id="reminderTime" required>
+            </div>
+            
+            <div class="reminder-actions">
+                <button type="button" class="btn" onclick="saveReminder()">שמור תזכורת</button>
+                <button type="button" class="btn-secondary" onclick="closeReminderModal()">ביטול</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- מודל עריכת משימה -->
+    <div id="editModal" class="modal" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()" aria-label="סגור">&times;</span>
+            <h2 id="editModalTitle">עריכת משימה</h2>
+            
+            <form id="editTaskForm" novalidate>
+                <input type="hidden" id="editTaskId">
+                
+                <div class="form-group">
+                    <label for="editTaskName">שם המשימה:</label>
+                    <input type="text" id="editTaskName" required minlength="2" maxlength="100">
+                    <button type="button" class="reminder-btn" id="editReminderBtn" onclick="toggleEditReminder()" aria-label="הפעל/בטל תזכורת" title="תזכורת">
+                        🔔
+                    </button>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editDueDate">תאריך יעד:</label>
+                        <input type="date" id="editDueDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editAssignee">אחראי:</label>
+                        <input type="text" id="editAssignee" required minlength="2" maxlength="50">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editStatus">סטטוס:</label>
+                    <select id="editStatus" required>
+                        <option value="pending">ממתין</option>
+                        <option value="in-progress">בביצוע</option>
+                        <option value="completed">הושלם</option>
+                    </select>
+                </div>
+                
+                <button type="button" class="btn" onclick="saveEditTask()">שמור שינויים</button>
+                <button type="button" class="btn-secondary" onclick="closeEditModal()">ביטול</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // מערך לשמירת כל המשימות
+        let tasks = [];
+        let currentFilter = 'all';
+        let searchTerm = '';
+        let currentReminderData = null;
+        let isEditingReminder = false;
+        let pendingDeleteTaskId = null;
+
+        // קבועים
+        const STORAGE_KEY = 'taskManagerData';
+        const MAX_TASK_NAME_LENGTH = 100;
+        const MAX_ASSIGNEE_LENGTH = 50;
+
+        // פונקציות שמירה מקומית
+        function saveToLocalStorage() {
+            try {
+                const data = {
+                    tasks: tasks,
+                    version: '1.0'
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+            } catch (error) {
+                showNotification('שגיאה בשמירת הנתונים', 'error');
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const data = localStorage.getItem(STORAGE_KEY);
+                if (data) {
+                    const parsed = JSON.parse(data);
+                    if (parsed.tasks && Array.isArray(parsed.tasks)) {
+                        tasks = parsed.tasks.map(task => ({
+                            ...task,
+                            id: task.id || Date.now() + Math.random()
+                        }));
+                        return true;
+                    }
+                }
+                return false;
+            } catch (error) {
+                console.error('Error loading from localStorage:', error);
+                showNotification('שגיאה בטעינת הנתונים', 'error');
+                return false;
+            }
+        }
+
+        // פונקציית התראות
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.role = 'alert';
+            notification.setAttribute('aria-live', 'polite');
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideInRight 0.3s ease reverse';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // פונקציות validation
+        function validateTaskData(taskData) {
+            const errors = [];
+            
+            if (!taskData.name || taskData.name.trim().length < 2) {
+                errors.push('שם המשימה חייב להכיל לפחות 2 תווים');
+            }
+            
+            if (taskData.name && taskData.name.length > MAX_TASK_NAME_LENGTH) {
+                errors.push(`שם המשימה לא יכול להיות ארוך מ-${MAX_TASK_NAME_LENGTH} תווים`);
+            }
+            
+            if (!taskData.assignee || taskData.assignee.trim().length < 2) {
+                errors.push('שם האחראי חייב להכיל לפחות 2 תווים');
+            }
+            
+            if (taskData.assignee && taskData.assignee.length > MAX_ASSIGNEE_LENGTH) {
+                errors.push(`שם האחראי לא יכול להיות ארוך מ-${MAX_ASSIGNEE_LENGTH} תווים`);
+            }
+            
+            if (!taskData.dueDate) {
+                errors.push('תאריך יעד הוא שדה חובה');
+            }
+            
+            if (!taskData.status || !['pending', 'in-progress', 'completed'].includes(taskData.status)) {
+                errors.push('סטטוס לא תקין');
+            }
+            
+            return errors;
+        }
+
+        // פונקציות תזכורת
+        function toggleReminder() {
+            const modal = document.getElementById('reminderModal');
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            isEditingReminder = false;
+            
+            // הגדרת תאריך ושעה ברירת מחדל
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('reminderDate').value = tomorrow.toISOString().split('T')[0];
+            document.getElementById('reminderTime').value = '09:00';
+            
+            setTimeout(() => {
+                document.getElementById('reminderDate').focus();
+            }, 100);
+        }
+
+        function toggleEditReminder() {
+            const modal = document.getElementById('reminderModal');
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            isEditingReminder = true;
+            
+            // טעינת נתונים קיימים אם יש
+            const taskId = parseFloat(document.getElementById('editTaskId').value);
+            const task = tasks.find(t => t.id === taskId);
+            
+            if (task && task.reminderDate && task.reminderTime) {
+                document.getElementById('reminderDate').value = task.reminderDate;
+                document.getElementById('reminderTime').value = task.reminderTime;
+            } else {
+                // ברירת מחדל
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                document.getElementById('reminderDate').value = tomorrow.toISOString().split('T')[0];
+                document.getElementById('reminderTime').value = '09:00';
+            }
+            
+            setTimeout(() => {
+                document.getElementById('reminderDate').focus();
+            }, 100);
+        }
+
+        function saveReminder() {
+            const reminderDate = document.getElementById('reminderDate').value;
+            const reminderTime = document.getElementById('reminderTime').value;
+            
+            if (!reminderDate || !reminderTime) {
+                showNotification('אנא מלא תאריך ושעה לתזכורת', 'error');
+                return;
+            }
+            
+            currentReminderData = {
+                date: reminderDate,
+                time: reminderTime,
+                enabled: true
+            };
+            
+            // עדכון הכפתור
+            if (isEditingReminder) {
+                const btn = document.getElementById('editReminderBtn');
+                btn.classList.add('active');
+                btn.style.color = '#ffc107';
+            } else {
+                const btn = document.getElementById('reminderBtn');
+                btn.classList.add('active');
+                btn.style.color = '#ffc107';
+            }
+            
+            const reminderDateTime = new Date(`${reminderDate}T${reminderTime}`);
+            const formattedTime = reminderDateTime.toLocaleDateString('he-IL') + ' בשעה ' + reminderTime;
+            showNotification(`תזכורת נקבעה ל-${formattedTime}`, 'success');
+            closeReminderModal();
+        }
+
+        function closeReminderModal() {
+            const modal = document.getElementById('reminderModal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        function clearReminder(isEdit = false) {
+            currentReminderData = null;
+            
+            const btn = isEdit ? document.getElementById('editReminderBtn') : document.getElementById('reminderBtn');
+            btn.classList.remove('active');
+            btn.style.color = '#999';
+            
+            showNotification('התזכורת בוטלה', 'warning');
+        }
+
+        // פונקציה להוספת משימה חדשה
+        function addNewTask() {
+            const taskName = document.getElementById('taskName').value.trim();
+            const dueDate = document.getElementById('dueDate').value;
+            const assignee = document.getElementById('assignee').value.trim();
+            const status = document.getElementById('status').value;
+            
+            const taskData = {
+                name: taskName,
+                dueDate: dueDate,
+                assignee: assignee,
+                status: status
+            };
+            
+            const errors = validateTaskData(taskData);
+            if (errors.length > 0) {
+                showNotification(errors[0], 'error');
+                return;
+            }
+            
+            const newTask = {
+                id: Date.now() + Math.floor(Math.random() * 1000),
+                name: taskName,
+                dueDate: dueDate,
+                assignee: assignee,
+                status: status,
+                createdAt: new Date().toLocaleDateString('he-IL'),
+                hasReminder: currentReminderData ? true : false,
+                reminderDate: currentReminderData ? currentReminderData.date : null,
+                reminderTime: currentReminderData ? currentReminderData.time : null
+            };
+            
+            tasks.unshift(newTask);
+            saveToLocalStorage();
+            updateStatusCards();
+            renderTasks();
+            
+            document.getElementById('taskForm').reset();
+            currentReminderData = null;
+            const reminderBtn = document.getElementById('reminderBtn');
+            reminderBtn.classList.remove('active');
+            reminderBtn.style.color = '#999';
+            setDefaultDate();
+            
+            showNotification('המשימה נוספה בהצלחה!');
+        }
+
+        // פונקציה לעריכת משימה
+        function editTask(taskId) {
+            const numericId = typeof taskId === 'string' ? parseFloat(taskId) : taskId;
+            const task = tasks.find(t => t.id == numericId);
+            if (!task) {
+                console.error('Task not found:', numericId);
+                showNotification('שגיאה: משימה לא נמצאה', 'error');
+                return;
+            }
+            
+            document.getElementById('editTaskId').value = task.id;
+            document.getElementById('editTaskName').value = task.name;
+            document.getElementById('editDueDate').value = task.dueDate;
+            document.getElementById('editAssignee').value = task.assignee;
+            document.getElementById('editStatus').value = task.status;
+            
+            // הגדרת כפתור התזכורת
+            const btn = document.getElementById('editReminderBtn');
+            if (task.hasReminder && task.reminderDate && task.reminderTime) {
+                btn.classList.add('active');
+                btn.style.color = '#ffc107';
+                currentReminderData = {
+                    date: task.reminderDate,
+                    time: task.reminderTime,
+                    enabled: true
+                };
+            } else {
+                btn.classList.remove('active');
+                btn.style.color = '#999';
+                currentReminderData = null;
+            }
+            
+            const modal = document.getElementById('editModal');
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            
+            // Focus on first input
+            setTimeout(() => {
+                document.getElementById('editTaskName').focus();
+            }, 100);
+        }
+
+        // שמירת עריכת משימה
+        function saveEditTask() {
+            const taskId = parseFloat(document.getElementById('editTaskId').value);
+            const taskIndex = tasks.findIndex(t => t.id == taskId);
+            
+            if (taskIndex === -1) {
+                showNotification('שגיאה: משימה לא נמצאה', 'error');
+                return;
+            }
+            
+            const taskName = document.getElementById('editTaskName').value.trim();
+            const dueDate = document.getElementById('editDueDate').value;
+            const assignee = document.getElementById('editAssignee').value.trim();
+            const status = document.getElementById('editStatus').value;
+            
+            const taskData = {
+                name: taskName,
+                dueDate: dueDate,
+                assignee: assignee,
+                status: status
+            };
+            
+            const errors = validateTaskData(taskData);
+            if (errors.length > 0) {
+                showNotification(errors[0], 'error');
+                return;
+            }
+            
+            tasks[taskIndex] = {
+                ...tasks[taskIndex],
+                name: taskName,
+                dueDate: dueDate,
+                assignee: assignee,
+                status: status,
+                hasReminder: currentReminderData ? true : false,
+                reminderDate: currentReminderData ? currentReminderData.date : null,
+                reminderTime: currentReminderData ? currentReminderData.time : null
+            };
+            
+            saveToLocalStorage();
+            updateStatusCards();
+            renderTasks();
+            closeEditModal();
+            
+            showNotification('המשימה עודכנה בהצלחה!');
+        }
+
+        // פונקציה להוספת event listeners למשימות
+        function attachTaskEventListeners() {
+            // כפתורי מחיקה
+            document.querySelectorAll('.task-delete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    console.log('Delete button clicked, task ID:', taskId, 'type:', typeof taskId);
+                    deleteTask(taskId);
+                });
+            });
+            
+            // כפתורי עריכה
+            document.querySelectorAll('.task-edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    editTask(taskId);
+                });
+            });
+            
+            // כפתורי התחלת עבודה
+            document.querySelectorAll('.task-start-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    updateTaskStatus(taskId, 'in-progress');
+                });
+            });
+            
+            // כפתורי השלמה
+            document.querySelectorAll('.task-complete-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const taskId = this.getAttribute('data-task-id');
+                    updateTaskStatus(taskId, 'completed');
+                });
+            });
+        }
+
+        // פונקציות מודל אישור מחיקה
+        function showDeleteConfirmModal(taskId, taskName) {
+            pendingDeleteTaskId = taskId;
+            const modal = document.getElementById('deleteConfirmModal');
+            const message = document.getElementById('deleteConfirmMessage');
+            
+            message.textContent = `האם אתה בטוח שברצונך למחוק את המשימה "${taskName}"?`;
+            modal.style.display = 'block';
+            modal.setAttribute('aria-hidden', 'false');
+            
+            // Focus על כפתור הביטול כברירת מחדל
+            setTimeout(() => {
+                document.getElementById('cancelDeleteBtn').focus();
+            }, 100);
+        }
+
+        function hideDeleteConfirmModal() {
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            pendingDeleteTaskId = null;
+        }
+
+        function confirmDelete() {
+            if (pendingDeleteTaskId) {
+                performDelete(pendingDeleteTaskId);
+                hideDeleteConfirmModal();
+            }
+        }
+
+        function performDelete(taskId) {
+            console.log('=== PERFORMING DELETE ===');
+            console.log('Deleting task ID:', taskId);
+            
+            const numericId = Number(taskId);
+            const indexToRemove = tasks.findIndex(t => Number(t.id) === numericId);
+            
+            if (indexToRemove !== -1) {
+                const removedTask = tasks.splice(indexToRemove, 1)[0];
+                console.log('Successfully removed task:', removedTask.name);
+                
+                saveToLocalStorage();
+                updateStatusCards();
+                renderTasks();
+                showNotification(`המשימה "${removedTask.name}" נמחקה בהצלחה`);
+            } else {
+                console.error('Could not find task to delete');
+                showNotification('שגיאה במחיקת המשימה', 'error');
+            }
+        }
+
+        // מחיקת משימה
+        function deleteTask(taskId) {
+            console.log('Delete task called with ID:', taskId);
+            
+            const numericId = Number(taskId);
+            const task = tasks.find(t => Number(t.id) === numericId);
+            
+            if (!task) {
+                console.error('Task not found with ID:', numericId);
+                showNotification('שגיאה: משימה לא נמצאה', 'error');
+                return;
+            }
+            
+            // הצגת מודל האישור
+            showDeleteConfirmModal(numericId, task.name);
+        }
+
+        function closeEditModal() {
+            const modal = document.getElementById('editModal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+            currentReminderData = null;
+            
+            // איפוס צבע כפתור התזכורת
+            const reminderBtn = document.getElementById('editReminderBtn');
+            reminderBtn.classList.remove('active');
+            reminderBtn.style.color = '#999';
+        }
+
+        // פונקציות חיפוש
+        function searchTasks() {
+            const input = document.getElementById('searchInput');
+            const clearBtn = document.getElementById('clearSearch');
+            const searchIcon = document.getElementById('searchIcon');
+            
+            searchTerm = input.value.trim().toLowerCase();
+            
+            if (searchTerm) {
+                clearBtn.style.display = 'block';
+                searchIcon.style.display = 'none';
+            } else {
+                clearBtn.style.display = 'none';
+                searchIcon.style.display = 'block';
+            }
+            
+            renderTasks();
+        }
+
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchTerm = '';
+            document.getElementById('clearSearch').style.display = 'none';
+            document.getElementById('searchIcon').style.display = 'block';
+            renderTasks();
+        }
+
+        // פונקציה לעיצוב תאריך בעברית
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('he-IL');
+        }
+
+        // פונקציה לבדיקה אם משימה באיחור
+        function isOverdue(task) {
+            if (task.status === 'completed') return false;
+            const today = new Date();
+            const dueDate = new Date(task.dueDate);
+            today.setHours(0, 0, 0, 0);
+            dueDate.setHours(0, 0, 0, 0);
+            return dueDate < today;
+        }
+
+        // פונקציה לקבלת טקסט הסטטוס בעברית
+        function getStatusText(task) {
+            if (isOverdue(task)) return 'באיחור';
+            
+            const statusMap = {
+                'pending': 'ממתין',
+                'in-progress': 'בביצוע', 
+                'completed': 'הושלם'
+            };
+            return statusMap[task.status] || task.status;
+        }
+
+        // פונקציה לקבלת מחלקת CSS לסטטוס
+        function getStatusClass(task) {
+            if (isOverdue(task)) return 'status-overdue';
+            return `status-${task.status}`;
+        }
+
+        // פונקציה לעדכון סטטוס משימה
+        function updateTaskStatus(taskId, newStatus) {
+            const numericId = typeof taskId === 'string' ? parseFloat(taskId) : taskId;
+            const taskIndex = tasks.findIndex(task => task.id == numericId);
+            if (taskIndex !== -1) {
+                const oldStatus = tasks[taskIndex].status;
+                tasks[taskIndex].status = newStatus;
+                saveToLocalStorage();
+                updateStatusCards();
+                renderTasks();
+                
+                const statusText = getStatusText(tasks[taskIndex]);
+                showNotification(`סטטוס המשימה עודכן ל: ${statusText}`);
+            }
+        }
+
+        // עדכון כרטיסי הסטטוס
+        function updateStatusCards() {
+            const counts = {
+                pending: 0,
+                inProgress: 0,
+                overdue: 0,
+                completed: 0,
+                all: tasks.length
+            };
+
+            tasks.forEach(task => {
+                if (isOverdue(task)) {
+                    counts.overdue++;
+                } else {
+                    switch (task.status) {
+                        case 'pending':
+                            counts.pending++;
+                            break;
+                        case 'in-progress':
+                            counts.inProgress++;
+                            break;
+                        case 'completed':
+                            counts.completed++;
+                            break;
+                    }
+                }
+            });
+
+            document.getElementById('pendingCount').textContent = counts.pending;
+            document.getElementById('inProgressCount').textContent = counts.inProgress;
+            document.getElementById('overdueCount').textContent = counts.overdue;
+            document.getElementById('completedCount').textContent = counts.completed;
+            document.getElementById('allTasksCount').textContent = counts.all;
+        }
+
+        // פונקציה לסינון משימות
+        function filterTasks(filter) {
+            currentFilter = filter;
+            
+            // עדכון הכרטיסים הפעילים
+            document.querySelectorAll('.status-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            
+            // עדכון כפתור "כל המשימות"
+            const allTasksBtn = document.getElementById('allTasksBtn');
+            allTasksBtn.classList.remove('active');
+            
+            if (filter === 'all') {
+                allTasksBtn.classList.add('active');
+            } else {
+                // מציאת הכרטיס הנכון לפי הקלאס
+                const filterClassMap = {
+                    'pending': 'card-pending',
+                    'in-progress': 'card-in-progress', 
+                    'overdue': 'card-overdue',
+                    'completed': 'card-completed'
+                };
+                
+                const targetClass = filterClassMap[filter];
+                if (targetClass) {
+                    const targetCard = document.querySelector(`.${targetClass}`);
+                    if (targetCard) {
+                        targetCard.classList.add('active');
+                    }
+                }
+            }
+            
+            renderTasks();
+        }
+
+        // פונקציה לקבלת המשימות המסוננות
+        function getFilteredTasks() {
+            let filteredTasks = tasks;
+            
+            // סינון לפי קטגוריה
+            switch (currentFilter) {
+                case 'pending':
+                    filteredTasks = tasks.filter(task => task.status === 'pending' && !isOverdue(task));
+                    break;
+                case 'in-progress':
+                    filteredTasks = tasks.filter(task => task.status === 'in-progress' && !isOverdue(task));
+                    break;
+                case 'overdue':
+                    filteredTasks = tasks.filter(task => isOverdue(task));
+                    break;
+                case 'completed':
+                    filteredTasks = tasks.filter(task => task.status === 'completed');
+                    break;
+                default:
+                    filteredTasks = tasks;
+            }
+            
+            // סינון לפי חיפוש
+            if (searchTerm) {
+                filteredTasks = filteredTasks.filter(task =>
+                    task.name.toLowerCase().includes(searchTerm) ||
+                    task.assignee.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            return filteredTasks;
+        }
+
+        // פונקציה לקבלת כותרת המסך
+        function getFilterTitle() {
+            const titles = {
+                'pending': 'משימות בהמתנה',
+                'in-progress': 'משימות בביצוע',
+                'overdue': 'משימות באיחור',
+                'completed': 'משימות שהושלמו',
+                'all': 'כל המשימות'
+            };
+            
+            let title = titles[currentFilter] || 'כל המשימות';
+            
+            if (searchTerm) {
+                title += ` - תוצאות חיפוש עבור "${searchTerm}"`;
+            }
+            
+            return title;
+        }
+
+        // פונקציה לעיבוד והצגת המשימות
+        function renderTasks() {
+            const tasksList = document.getElementById('tasksList');
+            const tasksTitle = document.getElementById('tasksTitle');
+            const tasksCount = document.getElementById('tasksCount');
+            const filteredTasks = getFilteredTasks();
+            
+            tasksTitle.textContent = getFilterTitle();
+            tasksCount.textContent = filteredTasks.length;
+            
+            if (filteredTasks.length === 0) {
+                let emptyMessage = 'אין משימות';
+                if (searchTerm) {
+                    emptyMessage = 'לא נמצאו משימות המתאימות לחיפוש';
+                } else if (currentFilter !== 'all') {
+                    emptyMessage = `אין ${getFilterTitle().toLowerCase()}`;
+                }
+                
+                tasksList.innerHTML = `
+                    <div class="empty-state">
+                        <h3>${emptyMessage}</h3>
+                        <p>${searchTerm ? 'נסה לחפש משהו אחר' : (currentFilter === 'all' ? 'הוסף את המשימה הראשונה שלך למעלה' : 'בחר קטגוריה אחרת או הוסף משימות חדשות')}</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const tasksHTML = filteredTasks.map((task, index) => `
+                <div class="task-item ${isOverdue(task) ? 'overdue' : ''} ${task.hasReminder ? 'has-reminder' : ''}" role="listitem" data-task-id="${task.id}">
+                    <div class="task-header">
+                        <div class="task-title">${escapeHtml(task.name)}</div>
+                        <span class="task-status ${getStatusClass(task)}">
+                            ${getStatusText(task)}
+                        </span>
+                    </div>
+                    
+                    <div class="task-details">
+                        <div class="task-detail">
+                            <span>תאריך יעד:</span> ${formatDate(task.dueDate)}
+                        </div>
+                        <div class="task-detail">
+                            <span>אחראי:</span> ${escapeHtml(task.assignee)}
+                        </div>
+                        ${task.hasReminder && task.reminderDate && task.reminderTime ? `
+                        <div class="task-detail">
+                            <span>תזכורת:</span> ${formatDate(task.reminderDate)} בשעה ${task.reminderTime}
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="task-actions">
+                        <button class="btn-small btn-edit task-edit-btn" data-task-id="${task.id}" aria-label="ערוך משימה: ${escapeHtml(task.name)}">
+                            עריכה
+                        </button>
+                        <button class="btn-small btn-delete task-delete-btn" data-task-id="${task.id}" aria-label="מחק משימה: ${escapeHtml(task.name)}">
+                            מחיקה
+                        </button>
+                        ${task.status !== 'completed' ? `
+                            ${task.status === 'pending' ? `
+                                <button class="btn-small task-start-btn" data-task-id="${task.id}" aria-label="התחל עבודה על: ${escapeHtml(task.name)}">
+                                    התחל עבודה
+                                </button>
+                            ` : ''}
+                            <button class="btn-small task-complete-btn" data-task-id="${task.id}" aria-label="סמן כהושלם: ${escapeHtml(task.name)}">
+                                סמן כהושלם
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+            
+            tasksList.innerHTML = tasksHTML;
+            
+            // הוספת event listeners לכפתורים
+            attachTaskEventListeners();
+        }
+
+        // פונקציה לקיבוע תאריך ברירת מחדל (מחר)
+        function setDefaultDate() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const dateInput = document.getElementById('dueDate');
+            dateInput.value = tomorrow.toISOString().split('T')[0];
+        }
+
+        // פונקציה לניקוי HTML (אבטחה)
+        function escapeHtml(text) {
+            const map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
+        // הוספת כמה משימות לדוגמה
+        function addSampleTasks() {
+            // רק אם אין משימות קיימות
+            if (tasks.length > 0) return;
+            
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            const nextWeek = new Date(today);
+            nextWeek.setDate(nextWeek.getDate() + 7);
+            
+            const sampleTasks = [
+                {
+                    id: Date.now() + Math.random(),
+                    name: "פגישה עם לקוח חדש",
+                    dueDate: tomorrow.toISOString().split('T')[0],
+                    assignee: "יוסי כהן",
+                    status: "pending",
+                    createdAt: new Date().toLocaleDateString('he-IL'),
+                    hasReminder: true
+                },
+                {
+                    id: Date.now() + Math.random() + 1,
+                    name: "סיכום דוח חודשי",
+                    dueDate: nextWeek.toISOString().split('T')[0],
+                    assignee: "שרה לוי",
+                    status: "in-progress", 
+                    createdAt: new Date().toLocaleDateString('he-IL'),
+                    hasReminder: false
+                },
+                {
+                    id: Date.now() + Math.random() + 2,
+                    name: "עדכון האתר",
+                    dueDate: yesterday.toISOString().split('T')[0],
+                    assignee: "דוד רוזן",
+                    status: "pending",
+                    createdAt: new Date().toLocaleDateString('he-IL'),
+                    hasReminder: true
+                },
+                {
+                    id: Date.now() + Math.random() + 3,
+                    name: "הכנת מצגת",
+                    dueDate: today.toISOString().split('T')[0],
+                    assignee: "מיכל גרין",
+                    status: "completed",
+                    createdAt: new Date().toLocaleDateString('he-IL'),
+                    hasReminder: false
+                }
+            ];
+            
+            tasks = sampleTasks;
+            saveToLocalStorage();
+        }
+
+        // פונקציות טיפול באירועי מקלדת
+        function handleKeyboardEvents() {
+            // ESC לסגירת מודל
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeEditModal();
+                }
+            });
+
+            // Enter להוספת משימה
+            document.getElementById('taskForm').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    e.preventDefault();
+                    addNewTask();
+                }
+            });
+
+            // Enter לשמירת עריכה
+            document.getElementById('editTaskForm').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && e.ctrlKey) {
+                    e.preventDefault();
+                    saveEditTask();
+                }
+            });
+
+            // כרטיסי סטטוס עם Enter
+            document.querySelectorAll('.status-card').forEach(card => {
+                card.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+
+            // כפתור כל המשימות עם Enter
+            document.getElementById('allTasksBtn').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        }
+
+        // סגירת המודל בלחיצה מחוץ לתוכן
+        window.onclick = function(event) {
+            const editModal = document.getElementById('editModal');
+            const reminderModal = document.getElementById('reminderModal');
+            const deleteModal = document.getElementById('deleteConfirmModal');
+            
+            if (event.target == editModal) {
+                closeEditModal();
+            }
+            if (event.target == reminderModal) {
+                closeReminderModal();
+            }
+            if (event.target == deleteModal) {
+                hideDeleteConfirmModal();
+            }
+        }
+
+        // טעינת העמוד
+        window.addEventListener('load', function() {
+            // רישום Service Worker לעבודה offline
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('data:text/javascript;base64,Y29uc3QgQ0FDSEVfTkFNRSA9ICd0YXNrLW1hbmFnZXItdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLycsCiAgJy9pbmRleC5odG1sJwpdOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZnVuY3Rpb24oZXZlbnQpIHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMub3BlbihDQUNIRV9OQU1FKQogICAgICAudGhlbihmdW5jdGlvbihjYWNoZSkgewogICAgICAgIHJldHVybiBjYWNoZS5hZGRBbGwodXJsc1RvQ2FjaGUpOwogICAgICB9KQogICk7Cn0pOwoKc2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGZ1bmN0aW9uKGV2ZW50KSB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4oZnVuY3Rpb24ocmVzcG9uc2UpIHsKICAgICAgICBpZiAocmVzcG9uc2UpIHsKICAgICAgICAgIHJldHVybiByZXNwb25zZTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIGZldGNoKGV2ZW50LnJlcXVlc3QpOwogICAgICAgIH0KICAgICAgKQogICk7Cn0pOw==')
+                .then(function(registration) {
+                    console.log('Service Worker registered successfully:', registration.scope);
+                }).catch(function(error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+            }
+
+            // הצגת הודעת התקנה PWA
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                showInstallPrompt();
+            });
+
+            function showInstallPrompt() {
+                const installBanner = document.createElement('div');
+                installBanner.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; text-align: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+                        <div style="margin-bottom: 10px; font-weight: 600;">התקן את האפליקציה לגישה מהירה!</div>
+                        <button id="installBtn" style="background: white; color: #667eea; border: none; padding: 8px 16px; border-radius: 5px; font-weight: 600; margin-left: 10px; cursor: pointer;">התקן עכשיו</button>
+                        <button id="dismissBtn" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer;">אולי מאוחר יותר</button>
+                    </div>
+                `;
+                
+                document.body.appendChild(installBanner);
+                
+                document.getElementById('installBtn').addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        console.log(`User response to the install prompt: ${outcome}`);
+                        deferredPrompt = null;
+                    }
+                    document.body.removeChild(installBanner);
+                });
+                
+                document.getElementById('dismissBtn').addEventListener('click', () => {
+                    document.body.removeChild(installBanner);
+                });
+                
+                // הסתר את הבאנר אוטומטית אחרי 10 שניות
+                setTimeout(() => {
+                    if (document.body.contains(installBanner)) {
+                        document.body.removeChild(installBanner);
+                    }
+                }, 10000);
+            }
+
+            // טעינה מאחסון מקומי או הוספת דוגמאות
+            if (!loadFromLocalStorage()) {
+                addSampleTasks();
+            }
+            
+            updateStatusCards();
+            renderTasks();
+            setDefaultDate();
+            handleKeyboardEvents();
+            
+            // הוספת event listeners למודל המחיקה
+            document.getElementById('confirmDeleteBtn').addEventListener('click', confirmDelete);
+            document.getElementById('cancelDeleteBtn').addEventListener('click', hideDeleteConfirmModal);
+            
+            // הודעת ברוכים הבאים
+            setTimeout(() => {
+                if (tasks.length === 4) {
+                    showNotification('ברוכים הבאים! נוספו משימות לדוגמה');
+                } else {
+                    showNotification('ברוכים הבאים! הנתונים שלך נטענו בהצלחה');
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
