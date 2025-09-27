@@ -1938,7 +1938,7 @@
 
             // טעינה מאחסון מקומי או הוספת דוגמאות
             if (!loadFromLocalStorage()) {
-                addSampleTasks();
+                addSampleTasks(); // לא יוסיף כלום - האפליקציה תתחיל ריקה
             }
             
             updateStatusCards();
@@ -1952,11 +1952,7 @@
             
             // הודעת ברוכים הבאים
             setTimeout(() => {
-                if (tasks.length === 4) {
-                    showNotification('ברוכים הבאים! נוספו משימות לדוגמה');
-                } else {
-                    showNotification('ברוכים הבאים! הנתונים שלך נטענו בהצלחה');
-                }
+                showNotification('ברוכים הבאים למערכת ניהול המשימות!');
             }, 500);
         });
     </script>
